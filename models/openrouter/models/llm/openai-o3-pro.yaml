@@ -1,0 +1,172 @@
+model: openai/o3-pro
+label:
+  en_US: o3-pro
+  zh_Hans: o3-pro
+model_type: llm
+features:
+- agent-thought
+- vision
+- tool-call
+- stream-tool-call
+- multi-tool-call
+- document
+model_properties:
+  mode: chat
+  context_size: 200000
+parameter_rules:
+- name: max_completion_tokens
+  use_template: max_tokens
+  default: 33280
+  min: 1
+  max: 100000
+- name: seed
+  label:
+    zh_Hans: Seed
+    en_US: Seed
+  type: int
+  required: false
+  help:
+    zh_Hans: 指定后将尽可能使采样具有确定性；同一 seed 与参数应产生相同结果（部分模型不保证）。
+    en_US: If specified, sampling will be as deterministic as possible; same seed
+      and parameters should return the same result for some models.
+- name: response_format
+  use_template: response_format
+  label:
+    zh_Hans: 回复格式
+    en_US: Response Format
+  type: string
+  required: false
+  options:
+  - text
+  - json_object
+  - json_schema
+  help:
+    zh_Hans: '强制输出特定格式。例如 {type: text|json_object|json_schema}。当选择 json_schema 时，请提供下方
+      JSON Schema。'
+    en_US: 'Force specific output format, e.g. {type: text|json_object|json_schema}.
+      When using json_schema, also provide the JSON Schema below.'
+- name: json_schema
+  use_template: json_schema
+- name: tool_choice
+  label:
+    zh_Hans: 工具选择
+    en_US: Tool Choice
+  type: string
+  required: false
+  options:
+  - none
+  - auto
+  - required
+  help:
+    zh_Hans: 控制是否以及如何调用工具。可选 none、auto、required。
+    en_US: 'Controls if/which tool is called: none, auto, or required.'
+- name: enable_stream
+  label:
+    zh_Hans: 启用流式输出
+    en_US: Enable Stream
+  type: boolean
+  required: false
+  default: true
+  help:
+    zh_Hans: 是否以流式方式返回模型输出。关闭后将一次性返回完整响应。
+    en_US: Whether to stream model outputs. When disabled, a single complete response
+      is returned.
+- name: enable_thinking
+  label:
+    zh_Hans: 启用思考模式
+    en_US: Enable Thinking
+  type: string
+  required: false
+  options:
+  - dynamic
+  - manual
+  help:
+    zh_Hans: 选择 dynamic 强制开启思考（忽略 reasoning_effort/reasoning_budget，等价 reasoning.enabled=true）。选择
+      manual 可与 reasoning_effort 或 reasoning_budget 搭配；若都不填则仅开启默认思考。
+    en_US: Choose 'dynamic' to force reasoning.enabled=true (ignores reasoning_effort/reasoning_budget).
+      Choose 'manual' to optionally use reasoning_effort or reasoning_budget; if neither
+      is set, it just enables default reasoning.
+- name: reasoning_effort
+  label:
+    zh_Hans: 思考力度（effort）
+    en_US: Reasoning Effort
+  type: string
+  required: false
+  options:
+  - low
+  - medium
+  - high
+  help:
+    zh_Hans: 控制思考强度：low/medium/high。与 reasoning_budget 互斥，优先级更高。
+    en_US: 'Controls reasoning strength: low/medium/high. Mutually exclusive with
+      reasoning_budget and takes precedence.'
+- name: reasoning_budget
+  label:
+    zh_Hans: 思考 Token 预算
+    en_US: Reasoning Token Budget
+  type: int
+  required: false
+  min: 1
+  max: 100000
+  help:
+    zh_Hans: 为思考分配的最大 token 数（部分模型支持）。与 effort 互斥。
+    en_US: Maximum tokens allocated for reasoning (supported by some models). Mutually
+      exclusive with effort.
+- name: exclude_reasoning_tokens
+  label:
+    zh_Hans: 隐藏思考内容
+    en_US: Exclude Reasoning Tokens
+  type: boolean
+  required: false
+  default: false
+  help:
+    zh_Hans: 启用后仍会使用思考，但不会在响应中包含 reasoning 字段。
+    en_US: When enabled, model still uses reasoning but won't include it in the response.
+- name: verbosity
+  label:
+    zh_Hans: 详细程度
+    en_US: Verbosity
+  type: string
+  required: false
+  default: medium
+  options:
+  - low
+  - medium
+  - high
+  help:
+    zh_Hans: 控制模型响应的详细程度：low/medium/high。
+    en_US: 'Controls response verbosity: low/medium/high.'
+- name: enable_provider
+  label:
+    zh_Hans: 启用 Provider 路由
+    en_US: Enable Provider Routing
+  type: boolean
+  required: false
+  default: false
+  help:
+    zh_Hans: 默认关闭。开启后可在“provider”对象中配置 OpenRouter Provider 路由偏好（order、only、ignore、allow_fallbacks、require_parameters、data_collection、quantizations、sort、max_price
+      等）
+    en_US: Disabled by default. When enabled, you can configure OpenRouter provider
+      preferences via the 'provider' object (order, only, ignore, allow_fallbacks,
+      require_parameters, data_collection, quantizations, sort, max_price, etc).
+- name: provider
+  label:
+    zh_Hans: Provider 路由配置
+    en_US: Provider Preferences
+  type: text
+  required: false
+  help:
+    zh_Hans: 仅当启用“启用 Provider 路由”后生效。请输入 JSON 字符串，系统会在调用前解析为对象并按 OpenRouter 规范透传，例如
+      {order:["anthropic","openai"], allow_fallbacks:true, sort:"price", only:[],
+      ignore:[], require_parameters:false, data_collection:"allow|deny", quantizations:["fp16"],
+      max_price:{prompt:1, completion:2}}。
+    en_US: Effective only when 'Enable Provider Routing' is on. Enter a JSON string;
+      it will be parsed into an object before request and passed per OpenRouter spec,
+      e.g. {order:["anthropic","openai"], allow_fallbacks:true, sort:"price", only:[],
+      ignore:[], require_parameters:false, data_collection:"allow|deny", quantizations:["fp16"],
+      max_price:{prompt:1, completion:2}}. See openrouter.ai/docs/features/provider-routing
+pricing:
+  input: '20.0'
+  output: '80.0'
+  unit: '0.000001'
+  currency: USD
