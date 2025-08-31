@@ -66,9 +66,9 @@ parameter_rules:
       to dynamic Top-P.
 - name: max_completion_tokens
   use_template: max_tokens
-  default: 256
+  default: 640
   min: 1
-  max: 1024
+  max: 2048
 - name: seed
   label:
     zh_Hans: Seed
@@ -130,7 +130,7 @@ parameter_rules:
       ignore:[], require_parameters:false, data_collection:"allow|deny", quantizations:["fp16"],
       max_price:{prompt:1, completion:2}}. See openrouter.ai/docs/features/provider-routing
 pricing:
-  input: '2.5'
-  output: '3.0'
+  input: '2.0'
+  output: '5.0'
   unit: '0.000001'
   currency: USD

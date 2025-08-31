@@ -58,9 +58,9 @@ parameter_rules:
       below this threshold.
 - name: max_completion_tokens
   use_template: max_tokens
-  default: 5376
+  default: 21760
   min: 1
-  max: 16384
+  max: 65536
 - name: seed
   label:
     zh_Hans: Seed
@@ -141,7 +141,7 @@ parameter_rules:
   type: int
   required: false
   min: 1
-  max: 16384
+  max: 65536
   help:
     zh_Hans: 为思考分配的最大 token 数（部分模型支持）。与 effort 互斥。
     en_US: Maximum tokens allocated for reasoning (supported by some models). Mutually
@@ -200,7 +200,7 @@ parameter_rules:
       ignore:[], require_parameters:false, data_collection:"allow|deny", quantizations:["fp16"],
       max_price:{prompt:1, completion:2}}. See openrouter.ai/docs/features/provider-routing
 pricing:
-  input: '0.6'
+  input: '0.5'
   output: '1.7999999999999998'
   unit: '0.000001'
   currency: USD

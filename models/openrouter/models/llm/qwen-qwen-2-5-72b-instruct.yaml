@@ -169,7 +169,7 @@ parameter_rules:
       ignore:[], require_parameters:false, data_collection:"allow|deny", quantizations:["fp16"],
       max_price:{prompt:1, completion:2}}. See openrouter.ai/docs/features/provider-routing
 pricing:
-  input: '0.0666396'
-  output: '0.26668800000000004'
+  input: '0.051830799999999996'
+  output: '0.207424'
   unit: '0.000001'
   currency: USD

@@ -77,27 +77,6 @@ parameter_rules:
     zh_Hans: JSON 对象：tokenId -> 偏置（-100 到 100）。用于在采样前调整 logits。
     en_US: JSON object mapping token IDs to bias (-100 to 100). Applied to logits
       prior to sampling.
-- name: logprobs
-  label:
-    zh_Hans: 返回对数概率
-    en_US: Logprobs
-  type: boolean
-  required: false
-  default: false
-  help:
-    zh_Hans: 是否返回输出 token 的对数概率。
-    en_US: Whether to return log probabilities of output tokens.
-- name: top_logprobs
-  label:
-    zh_Hans: Top 对数概率数量
-    en_US: Top logprobs
-  type: int
-  required: false
-  min: 0
-  max: 20
-  help:
-    zh_Hans: 每个位置返回的最可能 token 数量（需开启 logprobs）。
-    en_US: Number of most likely tokens to return at each position (requires logprobs).
 - name: response_format
   use_template: response_format
   label:

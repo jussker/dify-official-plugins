@@ -25,41 +25,13 @@ parameter_rules:
     zh_Hans: 仅从每个后续标记的前 K 个选项中采样。
     en_US: Only sample from the top K options for each subsequent token.
   required: false
-- name: presence_penalty
-  use_template: presence_penalty
 - name: frequency_penalty
   use_template: frequency_penalty
-- name: repetition_penalty
-  required: false
-  type: float
-  default: 1.0
-  min: 0.0
-  max: 2.0
-  label:
-    zh_Hans: 重复惩罚
-    en_US: Repetition penalty
-  help:
-    zh_Hans: 用于控制模型生成时的重复度。提高 repetition_penalty 时可以降低重复。1.0 表示不做惩罚。
-    en_US: Controls repetition during generation. Higher repetition_penalty reduces
-      repetition. 1.0 means no penalty.
-- name: min_p
-  required: false
-  type: float
-  default: 0.0
-  min: 0.0
-  max: 1.0
-  label:
-    zh_Hans: 最小概率 (Min-P)
-    en_US: Min P
-  help:
-    zh_Hans: 相对最可能标记的最小概率阈值。仅考虑概率不低于该阈值的标记。
-    en_US: Minimum probability relative to the most likely token; filters out tokens
-      below this threshold.
 - name: max_completion_tokens
   use_template: max_tokens
-  default: 32000
+  default: 43648
   min: 1
-  max: 96000
+  max: 131072
 - name: seed
   label:
     zh_Hans: Seed
@@ -80,11 +52,14 @@ parameter_rules:
   options:
   - text
   - json_object
+  - json_schema
   help:
     zh_Hans: '强制输出特定格式。例如 {type: text|json_object|json_schema}。当选择 json_schema 时，请提供下方
       JSON Schema。'
     en_US: 'Force specific output format, e.g. {type: text|json_object|json_schema}.
       When using json_schema, also provide the JSON Schema below.'
+- name: json_schema
+  use_template: json_schema
 - name: tool_choice
   label:
     zh_Hans: 工具选择
@@ -145,7 +120,7 @@ parameter_rules:
   type: int
   required: false
   min: 1
-  max: 96000
+  max: 131072
   help:
     zh_Hans: 为思考分配的最大 token 数（部分模型支持）。与 effort 互斥。
     en_US: Maximum tokens allocated for reasoning (supported by some models). Mutually
@@ -204,7 +179,7 @@ parameter_rules:
       ignore:[], require_parameters:false, data_collection:"allow|deny", quantizations:["fp16"],
       max_price:{prompt:1, completion:2}}. See openrouter.ai/docs/features/provider-routing
 pricing:
-  input: '0.19999999999999998'
-  output: '1.1'
+  input: '0.14'
+  output: '0.86'
   unit: '0.000001'
   currency: USD

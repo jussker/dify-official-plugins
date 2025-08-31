@@ -10,7 +10,7 @@ features:
 - multi-tool-call
 model_properties:
   mode: chat
-  context_size: 131072
+  context_size: 131000
 parameter_rules:
 - name: temperature
   use_template: temperature
@@ -55,11 +55,11 @@ parameter_rules:
     zh_Hans: 相对最可能标记的最小概率阈值。仅考虑概率不低于该阈值的标记。
     en_US: Minimum probability relative to the most likely token; filters out tokens
       below this threshold.
-- name: max_tokens
+- name: max_completion_tokens
   use_template: max_tokens
-  default: 5376
+  default: 43648
   min: 1
-  max: 16384
+  max: 131000
 - name: seed
   label:
     zh_Hans: Seed
@@ -179,6 +179,7 @@ parameter_rules:
   type: int
   required: false
   min: 1
+  max: 131000
   help:
     zh_Hans: 为思考分配的最大 token 数（部分模型支持）。与 effort 互斥。
     en_US: Maximum tokens allocated for reasoning (supported by some models). Mutually
@@ -237,7 +238,7 @@ parameter_rules:
       ignore:[], require_parameters:false, data_collection:"allow|deny", quantizations:["fp16"],
       max_price:{prompt:1, completion:2}}. See openrouter.ai/docs/features/provider-routing
 pricing:
-  input: '0.07256312'
-  output: '0.2903936'
+  input: '0.072'
+  output: '0.28'
   unit: '0.000001'
   currency: USD

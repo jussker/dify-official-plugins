@@ -6,7 +6,7 @@ model_type: llm
 features: []
 model_properties:
   mode: chat
-  context_size: 256000
+  context_size: 32768
 parameter_rules:
 - name: temperature
   use_template: temperature
@@ -25,11 +25,11 @@ parameter_rules:
   use_template: presence_penalty
 - name: frequency_penalty
   use_template: frequency_penalty
-- name: max_completion_tokens
+- name: max_tokens
   use_template: max_tokens
-  default: 2688
+  default: 5376
   min: 1
-  max: 8192
+  max: 16384
 - name: seed
   label:
     zh_Hans: Seed
@@ -99,7 +99,7 @@ parameter_rules:
       ignore:[], require_parameters:false, data_collection:"allow|deny", quantizations:["fp16"],
       max_price:{prompt:1, completion:2}}. See openrouter.ai/docs/features/provider-routing
 pricing:
-  input: '2.5'
-  output: '10.0'
+  input: '2.0'
+  output: '8.0'
   unit: '0.000001'
   currency: USD

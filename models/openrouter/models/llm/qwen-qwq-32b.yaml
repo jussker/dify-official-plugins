@@ -5,6 +5,9 @@ label:
 model_type: llm
 features:
 - agent-thought
+- tool-call
+- stream-tool-call
+- multi-tool-call
 model_properties:
   mode: chat
   context_size: 131072
@@ -108,11 +111,27 @@ parameter_rules:
   options:
   - text
   - json_object
+  - json_schema
   help:
     zh_Hans: '强制输出特定格式。例如 {type: text|json_object|json_schema}。当选择 json_schema 时，请提供下方
       JSON Schema。'
     en_US: 'Force specific output format, e.g. {type: text|json_object|json_schema}.
       When using json_schema, also provide the JSON Schema below.'
+- name: json_schema
+  use_template: json_schema
+- name: tool_choice
+  label:
+    zh_Hans: 工具选择
+    en_US: Tool Choice
+  type: string
+  required: false
+  options:
+  - none
+  - auto
+  - required
+  help:
+    zh_Hans: 控制是否以及如何调用工具。可选 none、auto、required。
+    en_US: 'Controls if/which tool is called: none, auto, or required.'
 - name: enable_stream
   label:
     zh_Hans: 启用流式输出

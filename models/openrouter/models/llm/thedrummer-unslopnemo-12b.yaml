@@ -9,7 +9,7 @@ features:
 - multi-tool-call
 model_properties:
   mode: chat
-  context_size: 32000
+  context_size: 32768
 parameter_rules:
 - name: temperature
   use_template: temperature
@@ -54,11 +54,11 @@ parameter_rules:
     zh_Hans: 相对最可能标记的最小概率阈值。仅考虑概率不低于该阈值的标记。
     en_US: Minimum probability relative to the most likely token; filters out tokens
       below this threshold.
-- name: max_completion_tokens
+- name: max_tokens
   use_template: max_tokens
-  default: 10624
+  default: 5376
   min: 1
-  max: 32000
+  max: 16384
 - name: seed
   label:
     zh_Hans: Seed
@@ -161,7 +161,7 @@ parameter_rules:
       ignore:[], require_parameters:false, data_collection:"allow|deny", quantizations:["fp16"],
       max_price:{prompt:1, completion:2}}. See openrouter.ai/docs/features/provider-routing
 pricing:
-  input: '0.44999999999999996'
-  output: '0.44999999999999996'
+  input: '0.39999999999999997'
+  output: '0.39999999999999997'
   unit: '0.000001'
   currency: USD

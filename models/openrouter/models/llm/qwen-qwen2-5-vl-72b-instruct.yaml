@@ -7,7 +7,7 @@ features:
 - vision
 model_properties:
   mode: chat
-  context_size: 32000
+  context_size: 32768
 parameter_rules:
 - name: temperature
   use_template: temperature
@@ -139,7 +139,7 @@ parameter_rules:
       ignore:[], require_parameters:false, data_collection:"allow|deny", quantizations:["fp16"],
       max_price:{prompt:1, completion:2}}. See openrouter.ai/docs/features/provider-routing
 pricing:
-  input: '0.25'
-  output: '0.75'
+  input: '0.0999594'
+  output: '0.400032'
   unit: '0.000001'
   currency: USD

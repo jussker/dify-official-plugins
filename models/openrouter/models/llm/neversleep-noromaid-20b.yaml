@@ -6,7 +6,7 @@ model_type: llm
 features: []
 model_properties:
   mode: chat
-  context_size: 8192
+  context_size: 4096
 parameter_rules:
 - name: temperature
   use_template: temperature
@@ -64,11 +64,11 @@ parameter_rules:
     zh_Hans: 基于最可能标记的概率进行自适应筛选，类似动态 Top-P。
     en_US: Adaptive filtering based on the probability of the most likely token; similar
       to dynamic Top-P.
-- name: max_completion_tokens
+- name: max_tokens
   use_template: max_tokens
-  default: 640
+  default: 5376
   min: 1
-  max: 2048
+  max: 16384
 - name: seed
   label:
     zh_Hans: Seed
@@ -89,6 +89,24 @@ parameter_rules:
     zh_Hans: JSON 对象：tokenId -> 偏置（-100 到 100）。用于在采样前调整 logits。
     en_US: JSON object mapping token IDs to bias (-100 to 100). Applied to logits
       prior to sampling.
+- name: response_format
+  use_template: response_format
+  label:
+    zh_Hans: 回复格式
+    en_US: Response Format
+  type: string
+  required: false
+  options:
+  - text
+  - json_object
+  - json_schema
+  help:
+    zh_Hans: '强制输出特定格式。例如 {type: text|json_object|json_schema}。当选择 json_schema 时，请提供下方
+      JSON Schema。'
+    en_US: 'Force specific output format, e.g. {type: text|json_object|json_schema}.
+      When using json_schema, also provide the JSON Schema below.'
+- name: json_schema
+  use_template: json_schema
 - name: enable_stream
   label:
     zh_Hans: 启用流式输出
@@ -130,7 +148,7 @@ parameter_rules:
       ignore:[], require_parameters:false, data_collection:"allow|deny", quantizations:["fp16"],
       max_price:{prompt:1, completion:2}}. See openrouter.ai/docs/features/provider-routing
 pricing:
-  input: '1.25'
-  output: '2.0'
+  input: '1.0'
+  output: '1.75'
   unit: '0.000001'
   currency: USD

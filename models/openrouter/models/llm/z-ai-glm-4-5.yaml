@@ -10,7 +10,7 @@ features:
 - multi-tool-call
 model_properties:
   mode: chat
-  context_size: 98304
+  context_size: 131072
 parameter_rules:
 - name: temperature
   use_template: temperature
@@ -55,6 +55,19 @@ parameter_rules:
     zh_Hans: 相对最可能标记的最小概率阈值。仅考虑概率不低于该阈值的标记。
     en_US: Minimum probability relative to the most likely token; filters out tokens
       below this threshold.
+- name: top_a
+  required: false
+  type: float
+  default: 0.0
+  min: 0.0
+  max: 1.0
+  label:
+    zh_Hans: Top-A
+    en_US: Top A
+  help:
+    zh_Hans: 基于最可能标记的概率进行自适应筛选，类似动态 Top-P。
+    en_US: Adaptive filtering based on the probability of the most likely token; similar
+      to dynamic Top-P.
 - name: max_tokens
   use_template: max_tokens
   default: 5376

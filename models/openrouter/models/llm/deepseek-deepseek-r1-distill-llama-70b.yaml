@@ -111,14 +111,11 @@ parameter_rules:
   options:
   - text
   - json_object
-  - json_schema
   help:
     zh_Hans: '强制输出特定格式。例如 {type: text|json_object|json_schema}。当选择 json_schema 时，请提供下方
       JSON Schema。'
     en_US: 'Force specific output format, e.g. {type: text|json_object|json_schema}.
       When using json_schema, also provide the JSON Schema below.'
-- name: json_schema
-  use_template: json_schema
 - name: tool_choice
   label:
     zh_Hans: 工具选择
@@ -237,7 +234,7 @@ parameter_rules:
       ignore:[], require_parameters:false, data_collection:"allow|deny", quantizations:["fp16"],
       max_price:{prompt:1, completion:2}}. See openrouter.ai/docs/features/provider-routing
 pricing:
-  input: '0.0333198'
-  output: '0.13334400000000002'
+  input: '0.025915399999999998'
+  output: '0.103712'
   unit: '0.000001'
   currency: USD

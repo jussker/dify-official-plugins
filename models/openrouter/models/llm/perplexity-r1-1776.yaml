@@ -26,47 +26,11 @@ parameter_rules:
   use_template: presence_penalty
 - name: frequency_penalty
   use_template: frequency_penalty
-- name: repetition_penalty
-  required: false
-  type: float
-  default: 1.0
-  min: 0.0
-  max: 2.0
-  label:
-    zh_Hans: 重复惩罚
-    en_US: Repetition penalty
-  help:
-    zh_Hans: 用于控制模型生成时的重复度。提高 repetition_penalty 时可以降低重复。1.0 表示不做惩罚。
-    en_US: Controls repetition during generation. Higher repetition_penalty reduces
-      repetition. 1.0 means no penalty.
-- name: min_p
-  required: false
-  type: float
-  default: 0.0
-  min: 0.0
-  max: 1.0
-  label:
-    zh_Hans: 最小概率 (Min-P)
-    en_US: Min P
-  help:
-    zh_Hans: 相对最可能标记的最小概率阈值。仅考虑概率不低于该阈值的标记。
-    en_US: Minimum probability relative to the most likely token; filters out tokens
-      below this threshold.
 - name: max_tokens
   use_template: max_tokens
   default: 5376
   min: 1
   max: 16384
-- name: logit_bias
-  label:
-    zh_Hans: Logit 偏置
-    en_US: Logit Bias
-  type: string
-  required: false
-  help:
-    zh_Hans: JSON 对象：tokenId -> 偏置（-100 到 100）。用于在采样前调整 logits。
-    en_US: JSON object mapping token IDs to bias (-100 to 100). Applied to logits
-      prior to sampling.
 - name: enable_stream
   label:
     zh_Hans: 启用流式输出
